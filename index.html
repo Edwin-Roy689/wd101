@@ -63,10 +63,11 @@
               type="date"
               id="dob"
               name="dob"
-              min="1970-06-18"
-              max="2006-06-18"
+              min=""
+              max=""
               class="bg-gray-100 inline-block rounded-lg shadow-md px-4 py-3 mb-5 text-base leading-6 placeholder-gray-400 focus:outline-none"
             />
+
             <br />
 
             <input
@@ -110,13 +111,25 @@
       }
     </script>
     <script>
-      const today = new Date();
-      const maxDate = new Date(today.getFullYear() - 19, today.getMonth(), today.getDate());
-      const minDate = new Date(today.getFullYear() - 54, today.getMonth(), today.getDate());
-      const formatDate = (date) => date.toISOString().split("T")[0];
+      // Set dynamic min and max dates for age 18 to 55
       const dobInput = document.getElementById("dob");
-      dobInput.max = formatDate(maxDate);
+      const today = new Date();
+
+      // Calculate date range
+      const minDate = new Date(today.getFullYear() - 55, today.getMonth(), today.getDate());
+      const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+
+      // Format date as YYYY-MM-DD
+      const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+      };
+
+      // Set attributes
       dobInput.min = formatDate(minDate);
+      dobInput.max = formatDate(maxDate);
     </script>
     <script src="index.js"></script>
   </body>
